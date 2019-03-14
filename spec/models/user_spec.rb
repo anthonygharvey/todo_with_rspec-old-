@@ -30,6 +30,10 @@ RSpec.describe User, type: :model do
 		expect(invalid_user).not_to be_valid
 	end
 
-	it 'has many tasks' do
+	# it 'has many tasks' do
+	# end
+
+	it 'has two tasks' do
+		expect(user.tasks.length).to eq(2)
 	end
 end

@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  it "has a valid factory" do
+	let(:user) {build(:user)}	
+
+	it "has a valid factory" do
 		# expect(build(:task)).to be_valid
 		expect(FactoryBot.build(:homework)).to be_valid
 	end
@@ -11,8 +13,9 @@ RSpec.describe Task, type: :model do
 		expect(task).to be_valid
 	end
 
-  it 'is valid with valid attributes' do
-    task = create(:vote)
+	it 'is valid with valid attributes' do
+		# change from :vote to :homework
+    task = create(:homework)
     expect(task).to be_valid
 	end
 	
@@ -37,10 +40,11 @@ RSpec.describe Task, type: :model do
 	end
 	
 	it 'is invalid without Due Date' do
-
+		task = build(:homework, due_date: nil)
+		expect(task).not_to be_valid
 	end
 
 	it 'belongs to User' do
-		
+		expect(Task.reflect_on_association(:user).macro).to eq(:belongs_to)
 	end
 end
