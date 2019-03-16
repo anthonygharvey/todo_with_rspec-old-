@@ -38,8 +38,7 @@ RSpec.describe User, type: :model do
 	end
 
 	it 'returns tasks due today' do
-		task = user.tasks.first
-		task.update(due_date: DateTime.now)
+		user.tasks.first.update(due_date: Time.now.to_date)
 		expect(user.due_today.length).to eq(1)
 	end
 end
